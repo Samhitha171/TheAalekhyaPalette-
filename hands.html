@@ -75,12 +75,11 @@
     nav a.active { color: var(--terracotta); }
     nav a.active::after { width: 100%; }
 
-    /* ── HERO IMAGE ── */
+    /* ── POST HERO — two column ── */
     .post-hero {
-      width: 100%;
-      max-height: 70vh;
-      overflow: hidden;
-      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 90vh;
       animation: fadeIn 1s ease both;
     }
 
@@ -89,30 +88,30 @@
       to   { opacity: 1; }
     }
 
-    .post-hero img {
+    /* Left: painting */
+    .post-hero-painting {
+      position: relative;
+      overflow: hidden;
+      background: var(--cream);
+    }
+
+    .post-hero-painting img {
       width: 100%;
-      height: 70vh;
-      object-fit: cover;
-      object-position: center 20%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
       display: block;
+      padding: 2rem;
     }
 
-    /* Gradient fade at bottom of hero */
-    .post-hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 50%;
-      background: linear-gradient(to top, var(--warm-white), transparent);
-    }
-
-    /* ── POST HEADER ── */
-    .post-header {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 3rem 2rem 0;
-      text-align: center;
-      animation: fadeUp 0.9s 0.2s ease both;
+    /* Right: post intro */
+    .post-hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 4rem 4rem;
+      background: var(--warm-white);
+      animation: fadeUp 1s 0.2s ease both;
     }
 
     @keyframes fadeUp {
@@ -120,7 +119,7 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .post-header .back-link {
+    .post-hero-text .back-link {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
@@ -129,13 +128,13 @@
       text-transform: uppercase;
       color: var(--muted);
       text-decoration: none;
-      margin-bottom: 2rem;
-      transition: color 0.2s, gap 0.2s;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
     }
 
-    .post-header .back-link:hover { color: var(--terracotta); gap: 0.7rem; }
+    .post-hero-text .back-link:hover { color: var(--terracotta); }
 
-    .post-tag {
+    .post-hero-text .post-tag {
       font-size: 0.7rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -144,40 +143,40 @@
       margin-bottom: 1rem;
     }
 
-    .post-header h1 {
+    .post-hero-text h1 {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
       line-height: 1.1;
       margin-bottom: 1.5rem;
     }
 
-    .post-byline {
+    .post-hero-text .post-byline {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.2rem;
+      flex-wrap: wrap;
+      gap: 0.6rem;
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       color: var(--muted);
+      align-items: center;
+      margin-bottom: 2rem;
     }
 
-    .post-byline .dot { opacity: 0.4; }
+    .post-hero-text .post-byline .dot { opacity: 0.35; }
 
-    .post-byline .author {
+    .post-hero-text .post-byline .author {
       font-family: 'Great Vibes', cursive;
       font-size: 1.1rem;
       color: var(--terracotta);
-      letter-spacing: 0.02em;
     }
 
-    /* ── DIVIDER ── */
-    .post-divider {
-      max-width: 700px;
-      margin: 2.5rem auto 0;
-      padding: 0 2rem;
-      border: none;
-      border-top: 1px solid rgba(181,96,74,0.13);
+    .post-hero-text .painting-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+      border-left: 2px solid var(--blush);
+      padding-left: 1rem;
+      line-height: 1.7;
     }
 
     /* ── ARTICLE BODY ── */
@@ -266,7 +265,14 @@
       opacity: 0.7;
     }
 
-    /* ── MID-ARTICLE IMAGE ── */
+    /* ── DIVIDER ── */
+    .post-divider {
+      max-width: 700px;
+      margin: 2.5rem auto 0;
+      padding: 0 2rem;
+      border: none;
+      border-top: 1px solid rgba(181,96,74,0.13);
+    }
     .post-figure {
       margin: 2.8rem -2rem;
       position: relative;
@@ -334,6 +340,10 @@
       .site-header { padding: 1.2rem 1.5rem; }
       nav { gap: 1.4rem; }
       .post-hero img { height: 45vw; min-height: 220px; }
+      .post-hero { grid-template-columns: 1fr; min-height: auto; }
+      .post-hero-painting { max-height: 60vw; }
+      .post-hero-painting img { padding: 1rem; }
+      .post-hero-text { padding: 2.5rem 1.5rem; }
       .post-header, .post-body, .post-footer { padding-left: 1.5rem; padding-right: 1.5rem; }
       .post-divider { padding: 0 1.5rem; }
       .post-figure { margin: 2rem 0; }
@@ -353,22 +363,25 @@
     </nav>
   </header>
 
-  <!-- Hero painting -->
+  <!-- Two-column hero -->
   <div class="post-hero">
-    <img src="23.jpg" alt="The Beauty of Painting Hands">
-  </div>
-
-  <!-- Post header -->
-  <div class="post-header">
-    <a href="blog.html" class="back-link">← Back to Blog</a>
-    <span class="post-tag">Reflection · Process</span>
-    <h1>The Beauty of Painting Hands</h1>
-    <div class="post-byline">
-      <span class="author">Samhitha Chandrashekhar</span>
-      <span class="dot">·</span>
-      <span>July 24, 2025</span>
-      <span class="dot">·</span>
-      <span>4 min read</span>
+    <div class="post-hero-painting">
+      <img src="23.jpg" alt="The Beauty of Painting Hands — by Samhitha">
+    </div>
+    <div class="post-hero-text">
+      <a href="blog.html" class="back-link">← Back to Blog</a>
+      <span class="post-tag">Reflection · Process</span>
+      <h1>The Beauty of Painting Hands</h1>
+      <div class="post-byline">
+        <span class="author">Samhitha Chandrashekhar</span>
+        <span class="dot">·</span>
+        <span>July 24, 2025</span>
+        <span class="dot">·</span>
+        <span>4 min read</span>
+      </div>
+      <p class="painting-note">
+        Acrylic portrait — the painting that made me fall in love with hands as a subject.
+      </p>
     </div>
   </div>
 
