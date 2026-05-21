@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Beauty of Painting Hands — The Aalekhya Palette</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f7f2ea;
+      --warm-white: #fdfaf5;
+      --ink: #1a1208;
+      --terracotta: #b5604a;
+      --gold: #c49a5a;
+      --blush: #e8cfc4;
+      --muted: #7a6a58;
+    }
+
+    html, body {
+      background: var(--warm-white);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 100;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 3.5rem;
+      border-bottom: 1px solid rgba(181,96,74,0.12);
+      background: var(--warm-white);
+      position: sticky; top: 0; z-index: 50;
+    }
+
+    .logo {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+
+    nav { display: flex; gap: 2.5rem; }
+
+    nav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--terracotta);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after { width: 100%; }
+    nav a.active { color: var(--terracotta); }
+    nav a.active::after { width: 100%; }
+
+    /* ── HERO IMAGE ── */
+    .post-hero {
+      width: 100%;
+      max-height: 70vh;
+      overflow: hidden;
+      position: relative;
+      animation: fadeIn 1s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .post-hero img {
+      width: 100%;
+      height: 70vh;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* Gradient fade at bottom of hero */
+    .post-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(to top, var(--warm-white), transparent);
+    }
+
+    /* ── POST HEADER ── */
+    .post-header {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem 2rem 0;
+      text-align: center;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .post-header .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.2s, gap 0.2s;
+    }
+
+    .post-header .back-link:hover { color: var(--terracotta); gap: 0.7rem; }
+
+    .post-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .post-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .post-byline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .post-byline .dot { opacity: 0.4; }
+
+    .post-byline .author {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.1rem;
+      color: var(--terracotta);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── DIVIDER ── */
+    .post-divider {
+      max-width: 700px;
+      margin: 2.5rem auto 0;
+      padding: 0 2rem;
+      border: none;
+      border-top: 1px solid rgba(181,96,74,0.13);
+    }
+
+    /* ── ARTICLE BODY ── */
+    .post-body {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+      animation: fadeUp 0.9s 0.3s ease both;
+    }
+
+    .post-body p {
+      font-size: 1.05rem;
+      line-height: 1.95;
+      color: #3a2e22;
+      margin-bottom: 1.6rem;
+    }
+
+    /* Drop cap on first paragraph */
+    .post-body p:first-of-type::first-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4.2rem;
+      font-weight: 400;
+      line-height: 0.75;
+      float: left;
+      margin-right: 0.1em;
+      margin-top: 0.08em;
+      color: var(--terracotta);
+    }
+
+    /* Pull quote */
+    .pull-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      line-height: 1.5;
+      color: var(--terracotta);
+      border-left: 3px solid var(--blush);
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    /* Poem / lyric block */
+    .poem {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 2;
+      color: var(--muted);
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px dashed rgba(181,96,74,0.2);
+      border-bottom: 1px dashed rgba(181,96,74,0.2);
+      margin: 2.5rem 0;
+    }
+
+    /* ── POST FOOTER ── */
+    .post-footer {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(181,96,74,0.12);
+      padding-top: 2rem;
+    }
+
+    .post-footer a.back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .post-footer a.back:hover { color: var(--terracotta); }
+
+    .post-footer .signature {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.6rem;
+      color: var(--terracotta);
+      opacity: 0.7;
+    }
+
+    /* ── MID-ARTICLE IMAGE ── */
+    .post-figure {
+      margin: 2.8rem -2rem;
+      position: relative;
+    }
+
+    .post-figure img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-radius: 3px;
+    }
+
+    .post-figure figcaption {
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-top: 0.8rem;
+      font-style: italic;
+    }
+
+    /* ── DISQUS ── */
+    .comments-section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+
+    .comments-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .comments-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(181,96,74,0.13);
+    }
+
+    /* ── SITE FOOTER ── */
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3.5rem;
+      border-top: 1px solid rgba(181,96,74,0.1);
+      background: var(--warm-white);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .site-footer .logo { font-size: 1.4rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .site-header { padding: 1.2rem 1.5rem; }
+      nav { gap: 1.4rem; }
+      .post-hero img { height: 45vw; min-height: 220px; }
+      .post-header, .post-body, .post-footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .post-divider { padding: 0 1.5rem; }
+      .post-figure { margin: 2rem 0; }
+      .site-footer { padding: 1.2rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="logo">Aalekhya</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="aboutme.html">About</a>
+    </nav>
+  </header>
+
+  <!-- Hero painting -->
+  <div class="post-hero">
+    <img src="23.jpg" alt="The Beauty of Painting Hands">
+  </div>
+
+  <!-- Post header -->
+  <div class="post-header">
+    <a href="blog.html" class="back-link">← Back to Blog</a>
+    <span class="post-tag">Reflection · Process</span>
+    <h1>The Beauty of Painting Hands</h1>
+    <div class="post-byline">
+      <span class="author">Samhitha Chandrashekhar</span>
+      <span class="dot">·</span>
+      <span>July 24, 2025</span>
+      <span class="dot">·</span>
+      <span>4 min read</span>
+    </div>
+  </div>
+
+  <hr class="post-divider">
+
+  <!-- Article -->
+  <div class="post-body">
+
+    <p>There's something endlessly intimate about hands. They hold, they hesitate, they speak when words run dry.</p>
+
+    <p>This particular portrait is all about the hands. Well, at least for me. I started painting her, trying to shine focus on her eyes, her hair, and her facial features, but by the time I had finished the painting, I realised her hand was the main attraction.</p>
+
+    <blockquote class="pull-quote">
+      "A hand can speak, even when a face is still. It can tremble in fear, reach in earnest, clench in anger."
+    </blockquote>
+
+    <p>Since then, I have come to realise that the hands are one of the most expressive parts of the human body. A hand can speak, even when a face is still. It can tremble in fear, reach in earnest, clench in anger. It can mean "I'm here," "I miss you," or "I let go."</p>
+
+    <p>Hands are honest. They don't pretend. The way they stretch or fold, how they age, how they move — it all tells the truth. That's why I love painting them. Not because they're easy. They're difficult, actually. Sometimes frustratingly so. Trying to express every shadow, vein, wrinkle and curve is a journey in itself. Painting them teaches me patience. It demands observation, anatomy, rhythm — and a little bit of surrender.</p>
+
+    <figure class="post-figure">
+      <img src="23.jpg" alt="Detail — the hand in this portrait">
+      <figcaption>The painting that started it all — where the hand became the subject</figcaption>
+    </figure>
+
+    <p>All of these made me observe people in real life — how a girl would wave her hands around when she's telling something that excites her, or a person fidgeting with their fingers when they're nervous. Sometimes a hand resting on a cheek says more than a smile ever could.</p>
+
+    <p>What fascinates me most is how universal their language is. We all understand a caress. A clenched fist. Interlocked fingers. It's a language with no words, but full of meaning. They're like quiet poetry.</p>
+
+    <div class="poem">
+      Because hands —<br>
+      They don't just do.<br>
+      They feel.<br>
+      They remember.<br>
+      They become.
+    </div>
+
+  </div>
+
+  <div class="post-footer">
+    <a href="blog.html" class="back">← All posts</a>
+    <span class="signature">Samhitha</span>
+  </div>
+
+  <div class="comments-section">
+    <p class="comments-label">Comments</p>
+    <div id="disqus_thread"></div>
+    <script>
+      // !! IMPORTANT: Replace 'YOUR-DISQUS-SHORTNAME' below with your actual
+      // Disqus shortname (the one from your original Netlify setup).
+      // You can find it at https://disqus.com → Admin → Settings → General
+      var disqus_config = function () {
+        this.page.url = window.location.href;
+        this.page.identifier = 'hands';
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://YOUR-DISQUS-SHORTNAME.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+
+  <footer class="site-footer">
+    <a href="index.html" class="logo">Aalekhya</a>
+    <span>© 2025 Samhitha Chandrashekhar</span>
+  </footer>
+
+</body>
+</html>
